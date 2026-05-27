@@ -38,12 +38,28 @@ jobs:
           set -euo pipefail
 
           PORT="${SSH_PORT:-22}"
+          SSH_OPTS="-i ~/.ssh/deploy_key -p $PORT -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes"
+
+          echo "Preparing SSH key"
           mkdir -p ~/.ssh
-          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
+
+          echo "Adding server host key"
           ssh-keyscan -p "$PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
 
-          ssh -i ~/.ssh/deploy_key -p "$PORT" "$SSH_USERNAME@$SSH_HOST" "mkdir -p '$SSH_TARGET_DIR'"
-          rsync -az --delete \
-            -e "ssh -i ~/.ssh/deploy_key -p $PORT" \
-            dist/ "$SSH_USERNAME@$SSH_HOST:$SSH_TARGET_DIR/"
+          echo "Testing SSH connection"
+          ssh $SSH_OPTS "$SSH_USERNAME@$SSH_HOST" "echo SSH connection OK && whoami && pwd"
+
+          echo "Preparing target directory"
+          ssh $SSH_OPTS "$SSH_USERNAME@$SSH_HOST" "mkdir -p '$SSH_TARGET_DIR'"
+
+          echo "Deploying dist directory"
+          if ssh $SSH_OPTS "$SSH_USERNAME@$SSH_HOST" "command -v rsync >/dev/null 2>&1"; then
+            rsync -az --delete \
+              -e "ssh -i ~/.ssh/deploy_key -p $PORT -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
+              dist/ "$SSH_USERNAME@$SSH_HOST:$SSH_TARGET_DIR/"
+          else
+            echo "rsync is not available on the server; using scp fallback without deletion"
+            scp -i ~/.ssh/deploy_key -P "$PORT" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -r dist/. "$SSH_USERNAME@$SSH_HOST:$SSH_TARGET_DIR/"
+          fi
