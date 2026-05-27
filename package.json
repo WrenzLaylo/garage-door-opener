@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "postbuild": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"if (Test-Path './garage-door-opener-site.zip') { Remove-Item './garage-door-opener-site.zip' }; Compress-Archive -Path './dist/*' -DestinationPath './garage-door-opener-site.zip' -Force\"",
+    "postbuild": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"New-Item -ItemType Directory -Force -Path './build-artifacts' | Out-Null; if (Test-Path './build-artifacts/garage-door-opener-site.zip') { Remove-Item './build-artifacts/garage-door-opener-site.zip' }; Compress-Archive -Path './dist/*' -DestinationPath './build-artifacts/garage-door-opener-site.zip' -Force\"",
     "preview": "vite preview"
   },
   "dependencies": {

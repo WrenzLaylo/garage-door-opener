@@ -10,6 +10,7 @@ node_modules/
 # Production build output
 dist/
 .vite/
+build-artifacts/
 
 # Logs
 *.log
