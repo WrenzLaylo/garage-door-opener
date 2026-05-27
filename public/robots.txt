@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://garage-door-opener.com.au/sitemap.xml
