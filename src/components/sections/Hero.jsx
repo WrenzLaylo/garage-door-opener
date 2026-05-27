@@ -39,7 +39,7 @@ export default function Hero() {
       }} />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 60, alignItems: 'center' }}
+        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.05fr) minmax(520px, 0.95fr)', gap: 72, alignItems: 'center' }}
           className="hero-grid">
 
           {/* LEFT */}
@@ -64,7 +64,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               style={{
                 fontFamily: 'var(--font-display)', fontWeight: 800,
-                fontSize: 'clamp(2.3rem, 5vw, 3.7rem)',
+                fontSize: 'clamp(2.3rem, 4.3vw, 4.25rem)',
                 lineHeight: 1.07, letterSpacing: '-0.03em',
                 color: 'var(--heading)', marginBottom: 18,
               }}
@@ -78,7 +78,7 @@ export default function Hero() {
             </motion.h1>
 
             <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
-              style={{ fontSize: '1.05rem', color: 'var(--subtle)', lineHeight: 1.75, marginBottom: 30, maxWidth: 460 }}>
+              style={{ fontSize: '1.08rem', color: 'var(--subtle)', lineHeight: 1.75, marginBottom: 30, maxWidth: 540 }}>
               Expert repair, installation and replacement of all opener brands.
               Same or next day service across Greater Melbourne.
             </motion.p>

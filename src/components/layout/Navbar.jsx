@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Phone, Menu, X, ChevronRight } from 'lucide-react'
 import { CONTACT } from '../../constants'
@@ -15,11 +15,27 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled,    setScrolled]    = useState(false)
   const [mobileOpen,  setMobileOpen]  = useState(false)
+  const scrolledRef = useRef(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50)
+    let frame = null
+    const onScroll = () => {
+      if (frame) return
+      frame = requestAnimationFrame(() => {
+        const nextScrolled = window.scrollY > 50
+        if (scrolledRef.current !== nextScrolled) {
+          scrolledRef.current = nextScrolled
+          setScrolled(nextScrolled)
+        }
+        frame = null
+      })
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    onScroll()
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (frame) cancelAnimationFrame(frame)
+    }
   }, [])
 
   useEffect(() => {

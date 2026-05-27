@@ -29,7 +29,7 @@ export default function ScrollReveal({
       variants={variants}
       transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
-      style={style}
+      style={{ willChange: 'transform, opacity', ...style }}
     >
       {children}
     </motion.div>
