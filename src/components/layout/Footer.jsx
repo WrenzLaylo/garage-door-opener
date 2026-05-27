@@ -5,12 +5,12 @@ const NAV_COLS = [
   {
     title: 'Services',
     links: [
-      { label: 'New Installation',   href: '#services' },
-      { label: 'Opener Replacement', href: '#services' },
-      { label: 'Smart Upgrades',     href: '#services' },
       { label: 'Opener Repair',      href: '#services' },
+      { label: 'Emergency Repair',   href: '#services' },
+      { label: 'Opener Replacement', href: '#services' },
       { label: 'Remote Programming', href: '#services' },
-      { label: 'Annual Servicing',   href: '#services' },
+      { label: 'Smart Upgrades',     href: '#services' },
+      { label: 'New Installation',   href: '#services' },
     ],
   },
   {
@@ -76,17 +76,18 @@ export default function Footer() {
             {/* Contact details */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {[
-                { icon: Phone, value: CONTACT.phone,   href: CONTACT.phoneTel },
-                { icon: Mail,  value: CONTACT.email,   href: `mailto:${CONTACT.email}` },
-                { icon: MapPin,value: CONTACT.address, href: null },
-              ].map(({ icon: Icon, value, href }) => (
+                { icon: Phone, label: 'Business',  value: CONTACT.phoneBusiness, href: CONTACT.phoneBusinessRaw },
+                { icon: Phone, label: 'Emergency', value: CONTACT.phoneEmergency, href: CONTACT.phoneEmergencyRaw },
+                { icon: Mail,  label: null,        value: CONTACT.email,          href: `mailto:${CONTACT.email}` },
+                { icon: MapPin,label: null,        value: CONTACT.address,        href: null },
+              ].map(({ icon: Icon, label, value, href }) => (
                 <div key={value} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <Icon size={14} color="rgba(37,99,235,0.8)" />
                   {href
                     ? <a href={href} style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.65)', textDecoration: 'none', transition: 'color 0.2s' }}
                         onMouseEnter={e => e.target.style.color = 'white'}
                         onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.65)'}
-                      >{value}</a>
+                      >{label ? `${label}: ${value}` : value}</a>
                     : <span style={{ fontSize: '0.85rem' }}>{value}</span>
                   }
                 </div>

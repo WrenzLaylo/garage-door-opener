@@ -119,13 +119,13 @@ export const TESTIMONIALS = [
     name:   'Chris B.',
     suburb: 'Box Hill',
     rating: 5,
-    text:   'Had a new B&D Merlin installed last week. The technician was punctual, professional and had it done in under 2 hours. The new opener is so much quieter than the old one. Very happy.',
+    text:   'Our opener stopped responding and the door was stuck half open. The technician arrived the same day, replaced the faulty control board and had everything working again before dinner.',
   },
   {
     name:   'Lisa M.',
     suburb: 'Glen Waverley',
     rating: 5,
-    text:   'Upgraded to a smart Wi-Fi opener and it\'s been a game changer. The team set up the app for me and connected it to Google Home. Excellent service from start to finish.',
+    text:   'The remote and wall button both failed after a power surge. AGG Doors diagnosed it quickly, reset the limits, replaced the receiver and programmed two remotes on the spot.',
   },
   {
     name:   'Peter H.',
@@ -137,13 +137,13 @@ export const TESTIMONIALS = [
     name:   'Angela T.',
     suburb: 'Doncaster',
     rating: 5,
-    text:   'Very knowledgeable team. They explained the difference between chain, belt and direct drive openers clearly and helped me choose the right one. Installation was flawless.',
+    text:   'Our garage door kept reversing before it closed. They realigned the safety sensors, serviced the opener and explained what had caused the fault. Honest, quick and very professional.',
   },
   {
     name:   'Mark S.',
     suburb: 'Camberwell',
     rating: 5,
-    text:   'Second time using AGG Doors. First rate service again — new Chamberlain installed, three remotes programmed, keypad set up outside. Everything works perfectly.',
+    text:   'Second time using AGG Doors. First rate service again - noisy motor repaired, chain tension adjusted and three remotes reprogrammed. Everything works perfectly.',
   },
   {
     name:   'Rachel W.',
@@ -158,12 +158,12 @@ export const WHY_US = [
   {
     icon:  'Award',
     title: '20+ Years Experience',
-    desc:  'Hundreds of opener installations completed every year across Melbourne by trained, licensed technicians.',
+    desc:  'Thousands of opener repairs, replacements and installations completed across Melbourne by trained, licensed technicians.',
   },
   {
     icon:  'ShieldCheck',
     title: '12-Month Warranty',
-    desc:  'Every installation backed by a 12-month parts and labour warranty. We stand behind every job we complete.',
+    desc:  'Repair parts, replacement units and installation labour are backed by a 12-month workmanship warranty.',
   },
   {
     icon:  'Star',
@@ -173,43 +173,43 @@ export const WHY_US = [
   {
     icon:  'Zap',
     title: 'Same or Next Day',
-    desc:  'We carry stock of all major opener brands on our vans. Most installations happen same or next business day.',
+    desc:  'Our vans carry common opener parts and replacement units, so most faults are fixed on the first visit.',
   },
 ]
 
 // ─── FAQ ──────────────────────────────────────────────────────────
 export const FAQ = [
   {
-    q: 'How much does garage door opener installation cost in Melbourne?',
-    a: 'Installation typically costs $450–$900 depending on the brand and drive type chosen. Chain drive openers are most affordable, belt drive quieter, and direct drive the most premium. We provide a firm quote before any work — no surprises.',
+    q: 'How much does garage door opener repair cost in Melbourne?',
+    a: 'Most opener repairs depend on the fault, parts required and door condition. Common remote, sensor and limit issues are usually cheaper than motor, board or drive assembly repairs. We inspect the opener first and provide a firm quote before work starts.',
+  },
+  {
+    q: 'Can you fix a garage door opener on the same day?',
+    a: 'Yes - same-day repair is available across Greater Melbourne whenever a technician is nearby. Our vans carry common parts for Merlin, B&D, Chamberlain, ATA and other major opener brands.',
+  },
+  {
+    q: 'What are the most common garage door opener faults?',
+    a: 'Common faults include remotes not responding, safety sensors misaligned, doors reversing before closing, noisy motors, worn gears, broken drive chains or belts, and motors running without moving the door.',
   },
   {
     q: 'Which garage door opener brand is best in Australia?',
     a: 'B&D (Merlin), Chamberlain, and ATA are Australia\'s most popular and reliable brands. All carry Australian warranties and have readily available parts. We can recommend the best fit for your door and budget.',
   },
   {
-    q: 'How long does garage door opener installation take?',
-    a: 'Most residential installations take 1.5 to 2.5 hours. This includes removing the old opener (if replacing), installing the new unit, programming all remotes, and completing a full safety test.',
+    q: 'When should I replace instead of repair my opener?',
+    a: 'Replacement is usually better when the motor is very old, parts are no longer available, the opener is unsafe, or repair costs approach the price of a newer quieter unit. We will always explain both options before you decide.',
+  },
+  {
+    q: 'How much does garage door opener installation cost in Melbourne?',
+    a: 'Installation typically costs $450-$900 depending on the brand and drive type chosen. Chain drive openers are most affordable, belt drive quieter, and direct drive the most premium. We provide a firm quote before any work - no surprises.',
   },
   {
     q: 'Can you install a smart Wi-Fi garage door opener?',
-    a: 'Yes — we install and fully set up smart openers including Chamberlain myQ, B&D Connecta, and others. We\'ll connect the app to your phone, set up delivery alerts, and integrate with Google Home or Alexa if you want.',
-  },
-  {
-    q: 'Will a new opener work with my existing garage door?',
-    a: 'In almost all cases yes. Our technicians assess your door type, weight and size before recommending an opener. If any adjustments are needed (spring balance, cable tension) we handle those as part of the installation.',
+    a: 'Yes - we install and fully set up smart openers including Chamberlain myQ, B&D Connecta, and others. We will connect the app to your phone, set up delivery alerts, and integrate with Google Home or Alexa if you want.',
   },
   {
     q: 'Do you service all suburbs of Melbourne?',
-    a: 'Yes — we cover all of Greater Melbourne including the Eastern, Western, Northern, and South-Eastern suburbs plus the Mornington Peninsula. Same-day and next-day bookings are available across the metro area.',
-  },
-  {
-    q: 'What is the difference between chain, belt and direct drive openers?',
-    a: 'Chain drive is the most affordable and durable but noisier. Belt drive uses a rubber belt — much quieter, ideal for attached garages. Direct drive has a single moving part — ultra-quiet, smooth, and low maintenance. We stock all three types.',
-  },
-  {
-    q: 'Do you offer a warranty on installation work?',
-    a: 'Yes — all parts and labour are covered by a 12-month warranty. The opener itself also carries the manufacturer\'s warranty (typically 2–5 years depending on brand and model).',
+    a: 'Yes - we cover all of Greater Melbourne including the Eastern, Western, Northern, and South-Eastern suburbs plus the Mornington Peninsula. Same-day and next-day bookings are available across the metro area.',
   },
 ]
 
