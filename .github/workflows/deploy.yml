@@ -1,4 +1,4 @@
-name: Build & Deploy to InterServer
+name: Build & Deploy to cPanel
 
 on:
   push:
@@ -9,57 +9,37 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+
+      # 1. Pull the code
+      - name: ⬇️ Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      # 2. Set up Node.js
+      - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: npm
+          node-version: 22
+          cache: 'npm'
 
-      - name: Install dependencies
+      # 3. Install dependencies
+      - name: 📦 Install dependencies
         run: npm ci
 
-      - name: Build
+      # 4. Build the React app
+      - name: 🔨 Build
         run: npm run build
-        env:
-          VITE_QUOTE_FORM_ENDPOINT: /quote-submit.php
-          VITE_TURNSTILE_SITE_KEY: ${{ secrets.TURNSTILE_SITE_KEY }}
 
-      - name: Deploy over SSH
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
-          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_TARGET_DIR: ${{ secrets.SSH_TARGET_DIR }}
-        run: |
-          set -euo pipefail
-
-          PORT="${SSH_PORT:-22}"
-          SSH_OPTS="-i ~/.ssh/deploy_key -p $PORT -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
-
-          echo "Preparing SSH key"
-          mkdir -p ~/.ssh
-          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-
-          echo "Adding server host key"
-          ssh-keyscan -T 20 -p "$PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts || true
-
-          echo "Testing SSH connection"
-          ssh $SSH_OPTS "$SSH_USERNAME@$SSH_HOST" "echo SSH connection OK && whoami && pwd"
-
-          echo "Preparing target directory"
-          ssh $SSH_OPTS "$SSH_USERNAME@$SSH_HOST" "mkdir -p '$SSH_TARGET_DIR'"
-
-          echo "Deploying dist directory"
-          if ssh $SSH_OPTS "$SSH_USERNAME@$SSH_HOST" "command -v rsync >/dev/null 2>&1"; then
-            rsync -az --delete \
-              -e "ssh -i ~/.ssh/deploy_key -p $PORT -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new" \
-              dist/ "$SSH_USERNAME@$SSH_HOST:$SSH_TARGET_DIR/"
-          else
-            echo "rsync is not available on the server; using scp fallback without deletion"
-            scp -i ~/.ssh/deploy_key -P "$PORT" -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new -r dist/. "$SSH_USERNAME@$SSH_HOST:$SSH_TARGET_DIR/"
-          fi
+      # 5. Deploy dist/ folder to cPanel via FTP
+      - name: 🚀 Deploy to cPanel
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          local-dir: ./dist/
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
