@@ -1,0 +1,10 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/southeas/garage-door-opener.com.au/
+    - export VITE_QUOTE_FORM_ENDPOINT=/quote-submit.php
+    - export VITE_TURNSTILE_SITE_KEY=x4AAAAAADW3k29cgfInNEg6
+    - npm ci
+    - npm run build
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -a dist/. $DEPLOYPATH

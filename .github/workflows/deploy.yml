@@ -1,4 +1,4 @@
-name: Build & Deploy to cPanel
+name: Build
 
 on:
   push:
@@ -6,40 +6,23 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      # 1. Pull the code
-      - name: ⬇️ Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Set up Node.js
-      - name: 🟢 Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: "npm"
+          node-version: 20
+          cache: npm
 
-      # 3. Install dependencies
-      - name: 📦 Install dependencies
+      - name: Install dependencies
         run: npm ci
 
-      # 4. Build the React app
-      - name: 🔨 Build
+      - name: Build
         run: npm run build
-
-      # 5. Deploy dist/ folder to cPanel via FTP
-      - name: 🚀 Deploy to cPanel
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          protocol: ftps
-          local-dir: ./dist/
-          dangerous-clean-slate: false
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
+        env:
+          VITE_QUOTE_FORM_ENDPOINT: /quote-submit.php
+          VITE_TURNSTILE_SITE_KEY: ${{ secrets.TURNSTILE_SITE_KEY }}
